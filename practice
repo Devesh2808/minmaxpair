@@ -1,0 +1,70 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+class Stack{
+    int stack[][]=new int[2][2];
+    int top=0;
+    public void insert(int a,int b){
+        if(top== stack.length){
+            System.out.println("overflow");
+        }
+        else{
+            stack[top][0]=a;
+            stack[top][1]=b;
+            top++;
+        }
+    }
+    public void display(){
+        for(int i=top-1;i>=0;i--){
+            System.out.println(stack[i][0]+" "+stack[i][1]);
+        }
+    }
+}
+
+public class Practice1 {
+    static void check(int arr[]){
+        int min=arr[0]*arr[1];
+        int max=min;
+        int a=arr[0],b=arr[1],c=arr[0],d=arr[1];
+        for(int i=0;i<arr.length;i++){
+            for(int j=i+1;j<arr.length;j++){
+                int x=arr[i];
+                int y=arr[j];
+                if(x*y>max){
+                    a=x;
+                    b=y;
+                    max=x*y;
+                }
+                else if(x*y<min){
+                    c=x;
+                    d=y;
+                    min=x*y;
+                }
+            }
+        }
+        Stack first=new Stack();
+        first.insert(a,b);
+        first.insert(c,d);
+        first.display();
+    }
+    public static void main(String[] args) {
+        Scanner cin=new Scanner(System.in);
+        int n=cin.nextInt();
+        if(n==0 || n==1){
+            System.out.println("Invalid Size");
+        }
+        else{
+            int arr[]=new int[n];
+            for(int i=0;i<n;i++){
+                try{
+                    arr[i]= cin.nextInt();
+                }
+                catch(InputMismatchException obj){
+                    System.out.println("Wrong input");
+                    break;
+                }
+            }
+            check(arr);
+        }
+    }
+}
